@@ -1,26 +1,77 @@
 @import "tailwindcss";
 
+@theme {
+  --font-sans: var(--font-plus-jakarta-sans), system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-mono: var(--font-jetbrains-mono), ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+
+  --color-surface-canvas: #070a0f;
+  --color-surface-sidebar: #0c1118;
+  --color-surface-card: #121822;
+  --color-surface-elevated: #17202e;
+
+  --color-border-subtle: rgba(255, 255, 255, 0.08);
+  --color-border-hover: rgba(255, 255, 255, 0.16);
+
+  --color-orb-cyan: #00f2fe;
+  --color-orb-emerald: #10b981;
+  --color-orb-indigo: #6366f1;
+}
+
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #070a0f;
+  --foreground: #ededed;
+  --surface-canvas: #070a0f;
+  --surface-sidebar: #0c1118;
+  --surface-card: #121822;
+  --surface-elevated: #17202e;
+  --border-subtle: rgba(255, 255, 255, 0.08);
+  --border-hover: rgba(255, 255, 255, 0.16);
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+/* Custom dark scrollbar styling */
+::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.12);
+  border-radius: 9999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.24);
+}
+
+* {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255, 255, 255, 0.12) transparent;
+}
+
+/* Atmospheric ambient gradient background */
+.aether-glow-bg {
+  background:
+    radial-gradient(ellipse 65% 45% at 50% -5%, rgba(6, 182, 212, 0.14), rgba(16, 185, 129, 0.04) 45%, transparent 70%),
+    radial-gradient(circle at 88% 8%, rgba(99, 102, 241, 0.08), transparent 40%),
+    #070a0f;
+}
+
+/* Orb breathing pulse animation */
+@keyframes orb-float {
+  0%, 100% {
+    transform: translateY(0px) scale(1);
+    filter: drop-shadow(0 0 32px rgba(6, 182, 212, 0.55));
+  }
+  50% {
+    transform: translateY(-4px) scale(1.02);
+    filter: drop-shadow(0 0 44px rgba(16, 185, 129, 0.65));
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+.animate-orb-float {
+  animation: orb-float 6s ease-in-out infinite;
 }
